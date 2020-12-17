@@ -40,6 +40,7 @@ void systick_inter_start(void)
 
 void systick_inter(unsigned short uart1mgr[],unsigned short uart2mgr[],unsigned short uart3mgr[])
 {
+	
 	if(uart1mgr[0]!=0)
 	{
 		if(uart1mgr[6]==0)

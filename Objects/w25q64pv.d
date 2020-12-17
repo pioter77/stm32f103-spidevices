@@ -1,4 +1,4 @@
-./objects/main.o: main.c \
+./objects/w25q64pv.o: W25Q64PV.c W25Q64PV.h \
   C:\Users\piotr\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h \
   RTE\_Target_1\RTE_Components.h \
   C:\Users\piotr\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm3.h \
@@ -9,4 +9,4 @@
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\arm_compat.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\arm_acle.h \
   C:\Users\piotr\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\system_stm32f10x.h \
-  gp_drive.h systick_lib.h spi_drive.h W25Q64PV.h
+  spi_drive.h gp_drive.h

@@ -418,6 +418,21 @@
               <FileType>5</FileType>
               <FilePath>.\spi_drive.h</FilePath>
             </File>
+            <File>
+              <FileName>main_defines.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\main_defines.h</FilePath>
+            </File>
+            <File>
+              <FileName>W25Q64PV.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\W25Q64PV.h</FilePath>
+            </File>
+            <File>
+              <FileName>W25Q64PV.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\W25Q64PV.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

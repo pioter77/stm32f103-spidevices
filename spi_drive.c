@@ -18,12 +18,10 @@ void my_spi_init1(void)
 	init_GP(PA,6,IN,I_PP);	//	miso
 	init_GP(PA,7,OUT50,O_AF_PP);	//clk
 	
-	SPI1->CR1 |=	SPI_CR1_MSTR;
+
 	SPI1->CR1 |=	0x31;//master mode, slck /256(spi speed)
-	SPI1->CR2 |=	SPI_CR2_SSOE;		//multimaster disable
-	SPI1->CR1 |=	SPI_CR1_SSM;	//dowolny pin cs a nie ten hardwarowy
-	SPI1->CR1 |=	SPI_CR1_SSI;
-	SPI1->CR1 |= 	SPI_CR1_SPE;		//ENABLE SPI1`
+//	SPI1->CR2 |=	SPI_CR2_SSOE;		//multimaster disable
+	SPI1->CR1 |=	SPI_CR1_SSM | SPI_CR1_SSI | SPI_CR1_SPE | SPI_CR1_MSTR;	//dowolny pin cs a nie ten hardwarowy; ENABLE SPI1;`master mode
 }
 
 void my_spi_init_ss(uint8_t port, uint8_t pin)
@@ -37,9 +35,9 @@ void my_spi_ss_ctrl(uint8_t port, uint8_t pin, _Bool state)
 	if(!state){
 		write_GP(port,pin,0);	//ENABLE transmission
 	}else {
-		while(SPI1->SR & SPI_SR_BSY)
-		{
-		}	//wait to finish sending last char otherwise will be cut and not transferred
+		//while(SPI1->SR & SPI_SR_BSY)
+	//	{
+		//}	//wait to finish sending last char otherwise will be cut and not transferred
 		write_GP(port,pin,1);	//DISABLE transmission
 	}
 }
@@ -61,3 +59,26 @@ uint8_t data=0;
 	data=(uint8_t)(SPI1->DR);		//8 msb lost we only use 8 bit mode here!
 return data;	
 }
+
+uint16_t my_spi_transmit(uint16_t data_tx)
+{
+	SPI1->DR=data_tx;
+	uint32_t prev_t=systick_sim_millis;
+	while(!(SPI1->SR & SPI_SR_TXE)){
+		if(systick_sim_millis-prev_t>100)
+		{
+			//ERR_SPI1=1;
+			return 0xFFFF;
+		}
+	}
+	while(!(SPI1->SR & SPI_SR_RXNE)){
+		if(systick_sim_millis-prev_t>100)
+		{
+			//ERR_SPI1=1;
+			return 0xFFFF;
+		}
+	}
+	return SPI1->DR;
+}
+
+

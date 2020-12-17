@@ -24,4 +24,5 @@ void my_spi_init_ss(uint8_t port, uint8_t pin);
 void my_spi_ss_ctrl(uint8_t port, uint8_t pin, _Bool state);
 void my_spi_write(char data);
 uint8_t my_spi_read(void);
+uint16_t my_spi_transmit(uint16_t data_tx);
 #endif

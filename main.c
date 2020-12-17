@@ -2,6 +2,7 @@
 #include "gp_drive.h"
 #include "systick_lib.h"
 #include "spi_drive.h"
+#include "W25Q64PV.h"
 /*
 SPI1
 -->PA4-SS
@@ -9,7 +10,7 @@ SPI1
 -->PA6-MISO
 -->PA7-MOSI
 */
-
+volatile uint32_t systick_sim_millis=0;
 // volatile int dummy_var=0;
 	//volatile uint16_t val1=0;
 int main(void)
@@ -18,6 +19,8 @@ int main(void)
 	systick_init();
 	my_spi_init1();
 	my_spi_init_ss(PA,4);
+	systick_inter_start();	// inkrement global systick_init val similar to milis used in spi
+	
 	//enable spi1 rccapb2 rgr
 	/*
 	RCC->APB2ENR |= RCC_APB2ENR_AFIOEN;
@@ -35,17 +38,28 @@ int main(void)
 	SPI1->CR1 |= 	SPI_CR1_SPE;		//ENABLE SPI1`
 	write_GP(PA,4,HIGH);
 	*/
-	char spi_buf1[]="masz ty wogle rozum i godnosc czlowieka ty gnoju";
+	//char spi_buf1[]="masz ty wogle rozum i godnosc czlowieka ty gnoju";
+	char spi_buf1[]={(char)0x05,'\0'};
+	char spi_red_buf[2]={[1]='\0'};
 	//uint8_t pos=0;
-	
+	uint8_t id_buff[8]={0,0,0,0,0,0,0,0};
+	delay_MS(10000);
+	power_down_spi_mem();
 	while(1)
 	{
+		/*
 		my_spi_ss_ctrl(PA,4,ENABLE_SS);
 		for(uint8_t pos=0;spi_buf1[pos]!='\0';pos++)
 		{
 			my_spi_write(spi_buf1[pos]);
 		}
+				for(uint8_t pos=0;spi_red_buf[pos]!='\0';pos++)
+		{
+			spi_red_buf[pos]=my_spi_read();
+		}
 		my_spi_ss_ctrl(PA,4,DISABLE_SS);	//zaczeka na koniec transmisji ostatniego znaku
+		*/
+		//read_spi_mem(0,8,id_buff);
 		delay_MS(100);
 			
 			
@@ -70,5 +84,14 @@ int main(void)
 		}
 			*/
 	}
+}
+
+void SysTick_Handler(void)
+{
+	systick_sim_millis++;
+	//tu inkrement globala
+	//to nie jest najlepsze rozwiazanie bo trzeba tracic miejsce na strukture do usarta1 mimo ze go sie nie uzywa i on sprawdza potem i probuje go odczytywac?
+	//odczytu nie ma chyba bo flaga [0] zawsze na 0
+	//systick_inter(uart_1_mgr,uart_2_mgr,uart_3_mgr);	to ma znaczeni tylko gdy uzywamy uarta jak timerowego ja uzywam uart przerwaniowo
 }
 
