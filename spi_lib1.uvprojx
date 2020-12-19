@@ -433,6 +433,16 @@
               <FileType>1</FileType>
               <FilePath>.\W25Q64PV.c</FilePath>
             </File>
+            <File>
+              <FileName>BMP280.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\BMP280.c</FilePath>
+            </File>
+            <File>
+              <FileName>BMP280.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\BMP280.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

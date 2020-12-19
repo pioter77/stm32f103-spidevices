@@ -3,6 +3,8 @@
 #include "systick_lib.h"
 #include "spi_drive.h"
 #include "W25Q64PV.h"
+#include "BMP280.h"
+
 /*
 SPI1
 -->PA4-SS
@@ -43,10 +45,22 @@ int main(void)
 	char spi_red_buf[2]={[1]='\0'};
 	//uint8_t pos=0;
 	uint8_t id_buff[8]={0,0,0,0,0,0,0,0};
-	delay_MS(10000);
-	power_down_spi_mem();
+	//delay_MS(5000);
+	bmp_280_init();
+	delay_MS(15);
+	volatile uint16_t tmpr=0;
+	volatile uint32_t press=0;
+	volatile uint8_t dummy_v=0;
+//	power_down_spi_mem();
 	while(1)
 	{
+		dummy_v=bmp_280_tst();
+	press=	bmp_280_read_press();
+		delay_MS(100);
+		bmp_280_tst2();
+	tmpr=	bmp_280_read_tempe();
+		dummy_v=1;
+		delay_MS(1000);
 		/*
 		my_spi_ss_ctrl(PA,4,ENABLE_SS);
 		for(uint8_t pos=0;spi_buf1[pos]!='\0';pos++)

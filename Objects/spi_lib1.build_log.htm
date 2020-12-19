@@ -22,37 +22,15 @@ Dialog DLL:      TCM.DLL V1.46.0.0
  
 <h2>Project:</h2>
 C:\Users\piotr\Documents\Keil_projekty\spi_lib1\spi_lib1.uvprojx
-Project File Date:  12/17/2020
+Project File Date:  12/19/2020
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.14', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
-main.c(43): warning: unused variable 'spi_red_buf' [-Wunused-variable]
-        char spi_red_buf[2]={[1]='\0'};
-             ^
-main.c(45): warning: unused variable 'id_buff' [-Wunused-variable]
-        uint8_t id_buff[8]={0,0,0,0,0,0,0,0};
-                ^
-main.c(42): warning: unused variable 'spi_buf1' [-Wunused-variable]
-        char spi_buf1[]={(char)0x05,'\0'};
-             ^
-main.c(89): warning: no previous prototype for function 'SysTick_Handler' [-Wmissing-prototypes]
-void SysTick_Handler(void)
-     ^
-main.c(89): note: declare 'static' if the function is not intended to be used outside of this translation unit
-void SysTick_Handler(void)
-^
-static 
-4 warnings generated.
-compiling main.c...
-W25Q64PV.c(5): warning: unused parameter 'addr' [-Wunused-parameter]
-void read_spi_mem(uint32_t addr,uint32_t len,uint8_t *holder)
-                           ^
-1 warning generated.
-compiling W25Q64PV.c...
+compiling BMP280.c...
 linking...
-Program Size: Code=1208 RO-data=252 RW-data=0 ZI-data=1640  
-".\Objects\spi_lib1.axf" - 0 Error(s), 5 Warning(s).
+Program Size: Code=1476 RO-data=252 RW-data=0 ZI-data=1640  
+".\Objects\spi_lib1.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -79,11 +57,11 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.4.0
 
    * Component: Keil::Device:Startup:1.0.0
-      Source file:   Device\Source\ARM\startup_stm32f10x_md.s
       Source file:   Device\Source\system_stm32f10x.c
+      Source file:   Device\Source\ARM\startup_stm32f10x_md.s
       Source file:   Device\Source\ARM\STM32F1xx_OPT.s
       Include file:  RTE_Driver\Config\RTE_Device.h
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>
